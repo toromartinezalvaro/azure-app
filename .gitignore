@@ -16,8 +16,5 @@ obj/
 *.tmp
 *.temp
 
-# Archivos de migraciones temporales de EF
-*Migrations*/
-
 # Archivos de configuración de Rider
 .idea/ 
