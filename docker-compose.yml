@@ -13,11 +13,12 @@ services:
   frontend:
     build:
       context: ./azure-app-client
+      args:
+        - VITE_API_URL=http://backend:8080
     container_name: remix-frontend
     depends_on:
       - backend
     environment:
       - NODE_ENV=production
-      - API_URL=http://localhost:8080
     ports:
       - "3000:3000"

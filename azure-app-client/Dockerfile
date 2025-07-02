@@ -3,6 +3,10 @@ FROM node:20 AS builder
 
 WORKDIR /app
 
+# Aceptar la variable como ARG
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 COPY . .
 
 RUN npm install
