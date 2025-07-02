@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using azure_app_server.Data;
+using azure_app_server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,37 @@ app.MapGet("/test-db", async (DatabaseContext db) =>
     }
 })
 .WithName("TestDatabase");
+
+// Expenses endpoints
+// Get all expenses
+app.MapGet("/expenses", async (DatabaseContext db) =>
+{
+    var expenses = await db.Expenses.OrderByDescending(e => e.Date).ToListAsync();
+    return Results.Ok(expenses);
+}).WithName("GetExpenses");
+
+// Create a new expense
+app.MapPost("/expenses", async (Expense expense, DatabaseContext db) =>
+{
+    // Set the date to now in UTC, ignore any value from the client
+    expense.Date = DateTime.UtcNow;
+
+    db.Expenses.Add(expense);
+    await db.SaveChangesAsync();
+    return Results.Created($"/expenses/{expense.Id}", expense);
+}).WithName("CreateExpense");
+
+// Delete an expense by id
+app.MapDelete("/expenses/{id:int}", async (int id, DatabaseContext db) =>
+{
+    var expense = await db.Expenses.FindAsync(id);
+    if (expense is null)
+        return Results.NotFound();
+
+    db.Expenses.Remove(expense);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteExpense");
 
 app.Run();
 
