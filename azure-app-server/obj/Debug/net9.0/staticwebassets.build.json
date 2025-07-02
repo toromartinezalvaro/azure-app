@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "sR5i7eS9mEzG9d3hCOkth3yr6LhN6Oz+4dAhAMzhk/o=",
+  "Source": "azure-app-server",
+  "BasePath": "_content/azure-app-server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
