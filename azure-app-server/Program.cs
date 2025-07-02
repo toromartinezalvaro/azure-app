@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using azure_app_server.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Agregar conexión a la base de datos
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -32,6 +39,22 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+// Endpoint para probar la conexión a la base de datos
+app.MapGet("/test-db", async (DatabaseContext db) =>
+{
+    try
+    {
+        // Intentar conectar a la base de datos
+        await db.Database.CanConnectAsync();
+        return Results.Ok(new { message = "Conexión a la base de datos exitosa!", timestamp = DateTime.UtcNow });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al conectar con la base de datos: {ex.Message}");
+    }
+})
+.WithName("TestDatabase");
 
 app.Run();
 
