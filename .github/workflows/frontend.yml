@@ -27,6 +27,8 @@ jobs:
           context: ./azure-app-client
           push: true
           tags: alvarotoroeafit/azure-app-client:latest
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
