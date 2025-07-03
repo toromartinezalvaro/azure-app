@@ -197,7 +197,7 @@ export default function Index() {
               disabled={submitting}
             >
               <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" d="M12 5v14m7-7H5"/></svg>
-              {submitting ? "Agregando..." : "Agregar gasto"}
+              {submitting ? "Agregando..." : "Agregar"}
             </button>
           </div>
         </form>
