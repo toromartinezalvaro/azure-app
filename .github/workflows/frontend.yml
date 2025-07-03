@@ -21,6 +21,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -31,8 +34,6 @@ jobs:
             alvarotoroeafit/azure-app-client:${{ github.sha }}
           build-args: |
             VITE_API_URL=${{ secrets.VITE_API_URL }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
