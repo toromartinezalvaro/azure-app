@@ -21,7 +21,7 @@ export default function Index() {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_API_URL || "azure-app-server.azurewebsites.net";
+  const apiUrl = import.meta.env.VITE_API_URL || "https://azure-app-server.azurewebsites.net";
 
   // Totals and summary (memoized)
   const totalAmount = useMemo(() => expenses.reduce((sum, e) => sum + e.amount, 0), [expenses]);
