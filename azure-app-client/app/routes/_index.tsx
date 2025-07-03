@@ -35,6 +35,7 @@ export default function Index() {
   console.log("URL completa que va a usar:", `${apiUrl}/expenses`);
   console.log("Entorno:", import.meta.env.MODE);
   console.log("===================");
+  // Force rebuild: improved workflows with multiple tags
 
   // Totals and summary (memoized)
   const totalAmount = useMemo(() => expenses.reduce((sum, e) => sum + e.amount, 0), [expenses]);

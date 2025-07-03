@@ -26,7 +26,11 @@ jobs:
         with:
           context: ./azure-app-server
           push: true
-          tags: alvarotoroeafit/azure-app-server:latest
+          tags: |
+            alvarotoroeafit/azure-app-server:latest
+            alvarotoroeafit/azure-app-server:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
