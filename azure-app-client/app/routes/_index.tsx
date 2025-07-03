@@ -36,6 +36,7 @@ export default function Index() {
   console.log("Entorno:", import.meta.env.MODE);
   console.log("===================");
   // Force rebuild: improved workflows with multiple tags
+  // Trigger workflow: Docker Buildx setup added
 
   // Totals and summary (memoized)
   const totalAmount = useMemo(() => expenses.reduce((sum, e) => sum + e.amount, 0), [expenses]);

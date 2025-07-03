@@ -37,6 +37,7 @@ if (app.Environment.IsDevelopment())
 // Azure App Service maneja HTTPS automáticamente, no necesitamos forzar redirección
 // app.UseHttpsRedirection();
 // Force rebuild: improved workflows with multiple tags
+// Trigger workflow: Docker Buildx setup added
 
 var summaries = new[]
 {
