@@ -34,7 +34,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// Azure App Service maneja HTTPS automáticamente, no necesitamos forzar redirección
+// app.UseHttpsRedirection();
 
 var summaries = new[]
 {

@@ -21,7 +21,20 @@ export default function Index() {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_API_URL || "https://azure-app-server.azurewebsites.net";
+  let apiUrl = import.meta.env.VITE_API_URL || "https://azure-app-server.azurewebsites.net";
+  
+  // Limpiar barra final si existe
+  if (apiUrl.endsWith('/')) {
+    apiUrl = apiUrl.slice(0, -1);
+  }
+  
+  // Debug para ver exactamente qué está pasando
+  console.log("=== DEBUG API URL ===");
+  console.log("VITE_API_URL raw:", import.meta.env.VITE_API_URL);
+  console.log("apiUrl final:", apiUrl);
+  console.log("URL completa que va a usar:", `${apiUrl}/expenses`);
+  console.log("Entorno:", import.meta.env.MODE);
+  console.log("===================");
 
   // Totals and summary (memoized)
   const totalAmount = useMemo(() => expenses.reduce((sum, e) => sum + e.amount, 0), [expenses]);
