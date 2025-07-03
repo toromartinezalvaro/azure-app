@@ -27,16 +27,6 @@ export default function Index() {
   if (apiUrl.endsWith('/')) {
     apiUrl = apiUrl.slice(0, -1);
   }
-  
-  // Debug para ver exactamente qué está pasando
-  console.log("=== DEBUG API URL ===");
-  console.log("VITE_API_URL raw:", import.meta.env.VITE_API_URL);
-  console.log("apiUrl final:", apiUrl);
-  console.log("URL completa que va a usar:", `${apiUrl}/expenses`);
-  console.log("Entorno:", import.meta.env.MODE);
-  console.log("===================");
-  // Force rebuild: improved workflows with multiple tags
-  // Trigger workflow: Docker Buildx setup added
 
   // Totals and summary (memoized)
   const totalAmount = useMemo(() => expenses.reduce((sum, e) => sum + e.amount, 0), [expenses]);
